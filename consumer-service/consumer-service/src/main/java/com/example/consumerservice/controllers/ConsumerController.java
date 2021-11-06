@@ -1,6 +1,9 @@
 package com.example.consumerservice.controllers;
 
 import com.example.consumerservice.model.Message;
+import com.example.consumerservice.service.ConsumerService;
+import com.example.consumerservice.service.Context;
+import com.example.consumerservice.service.Printer;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +14,15 @@ public class ConsumerController {
     @GetMapping(value = "/producer/{messageKey}/to/{messageValue}")
     @ResponseStatus(HttpStatus.OK)
     public SumMessage calculateSum(@PathVariable String messageKey,@PathVariable String messageValue) {
-        String sum = "5";
+        ConsumerService consumerService = new ConsumerService();
+
+        consumerService.updateSum(messageValue);
+
+        Context context = new Context(new Printer());
+        context.executeStrategy(new Message(messageKey, messageValue));
+
+        SumMessage sumMessage = new SumMessage(messageKey, consumerService.getSum());
+        int sum = 5;
         return new SumMessage(messageKey, sum);
     }
 
@@ -24,9 +35,9 @@ public class ConsumerController {
 
     class SumMessage {
         public String messageKey;
-        public String sum;
+        public int sum;
 
-         public SumMessage(String messageKey, String sum) {
+         public SumMessage(String messageKey, int sum) {
              this.messageKey = messageKey;
              this.sum = sum;
          }

@@ -4,4 +4,5 @@ import com.example.consumerservice.model.Message;
 
 public interface IMessageService {
     Message createMessage(Message Message);
+    void updateSum(String num);
 }
