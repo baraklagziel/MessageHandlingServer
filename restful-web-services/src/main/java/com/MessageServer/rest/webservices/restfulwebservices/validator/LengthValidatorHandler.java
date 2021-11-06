@@ -9,11 +9,7 @@ public class LengthValidatorHandler extends Handler  {
 
     @Override
     public boolean doHandle(HttpRequest request) {
-        try{
             if(request.getMessage().getContent().length()  == 0) throw new EmptyMessageException("input can't be empty");
             return true;
-        }catch(EmptyMessageException error){
-           return false;
         }
-    }
 }
