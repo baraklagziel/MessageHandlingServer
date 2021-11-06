@@ -2,6 +2,7 @@ package com.MessageServer.rest.webservices.restfulwebservices.controller;
 
 import com.MessageServer.rest.webservices.restfulwebservices.exception.BadRequestException;
 import com.MessageServer.rest.webservices.restfulwebservices.model.Message;
+import com.MessageServer.rest.webservices.restfulwebservices.model.MessageWrapper;
 import com.MessageServer.rest.webservices.restfulwebservices.service.MessageProducerService;
 import com.MessageServer.rest.webservices.restfulwebservices.service.impl.IMessageService;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,6 @@ public class MessageController {
         Message messageItem = new Message(message);
         IMessageService messageService;
         messageService = new MessageProducerService(messageItem);
-
         return messageService.getAllMessages();
     }
 
@@ -36,25 +36,11 @@ public class MessageController {
     public String calculateSum(@PathVariable String message) {
         HashMap<String, String> uriVariables = new HashMap<>();
         Message messageItem = new Message(message);
-        IMessageService messageService;
-        messageService = new MessageProducerService(messageItem);
+        IMessageService messageService = new MessageProducerService(messageItem);
         uriVariables.put("messageKey", message);
         uriVariables.put("messageValue", messageService.getAllMessages().getContent());
-        MessageController.MessageWrapper messageObject = new RestTemplate().getForObject("http://localhost:8182/message-handler/producer/{messageKey}/to/{messageValue}", MessageWrapper.class, uriVariables);
-//        return messageObject.toString();
+        MessageWrapper messageObject = new RestTemplate().getForObject("http://localhost:8182/message-handler/producer/{messageKey}/to/{messageValue}", MessageWrapper.class, uriVariables);
         return "barak";
     }
 
-
-    public static class MessageWrapper {
-        public String messageKey;
-        public String messageValue;
-
-        public MessageWrapper(String messageKey, String messageValue) {
-            this.messageKey = messageKey;
-            this.messageValue = messageValue;
-        }
-
-        public MessageWrapper(){}
-    }
 }

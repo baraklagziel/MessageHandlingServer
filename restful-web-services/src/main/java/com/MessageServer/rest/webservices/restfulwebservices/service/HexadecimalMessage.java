@@ -28,7 +28,7 @@ public class HexadecimalMessage implements IMessageType {
 
     public static boolean isHexadecimal(String input) {
         final Matcher matcher = HEXADECIMAL_PATTERN.matcher(input);
-        return matcher.matches() && input.length() == 1;
+        return matcher.matches() && input.length() == 1 && ((int) input.charAt(0) >= (int) 'A' && (int) input.charAt(0) <= (int) 'F') ;
     }
 
     @Override
