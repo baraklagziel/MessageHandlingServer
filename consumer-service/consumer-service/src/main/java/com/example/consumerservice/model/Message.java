@@ -17,11 +17,11 @@ public class Message {
         this.messageKey = messageKey;
     }
 
-    public String getMassageVale() {
+    public String getMassageValue() {
         return massageVale;
     }
 
-    public void setMassageVale(String massageVale) {
+    public void setMassageValue(String massageVale) {
         this.massageVale = massageVale;
     }
 }
