@@ -15,6 +15,8 @@ import java.util.List;
 public class MessageProducerService implements IMessageService {
     private List<IMessageType> messages;
     private Validator validator;
+    private static String value;
+
 
     public MessageProducerService(Message message) {
         this.messages = new ArrayList<>();
@@ -23,6 +25,7 @@ public class MessageProducerService implements IMessageService {
         Validator validator  = new Validator(positiveValidatorHandler);
         validator.validate(new HttpRequest(message));
         IMessageType messageType = new TypeFactory().getMessageType(message);
+//        this.value = String.valueOf(messageType.convertByType());
         this.messages.add(messageType);
     }
 
@@ -39,4 +42,13 @@ public class MessageProducerService implements IMessageService {
 
         return new Message(stringBuilder.toString());
     }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
 }
