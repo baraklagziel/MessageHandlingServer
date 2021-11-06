@@ -1,7 +1,5 @@
 package com.MessageServer.rest.webservices.restfulwebservices.service.impl;
 
-public interface IMessageType {
-    Type getType();
-    int convertByType();
+public interface IMessage {
     boolean isPositive();
 }
