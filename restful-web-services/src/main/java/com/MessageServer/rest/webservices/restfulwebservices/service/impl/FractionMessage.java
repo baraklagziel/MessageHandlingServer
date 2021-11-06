@@ -1,7 +1,7 @@
-package com.MessageServer.rest.webservices.restfulwebservices.service;
+package com.MessageServer.rest.webservices.restfulwebservices.service.impl;
 
 import com.MessageServer.rest.webservices.restfulwebservices.model.Message;
-import com.MessageServer.rest.webservices.restfulwebservices.service.impl.Type;
+import com.MessageServer.rest.webservices.restfulwebservices.service.Type;
 
 public class FractionMessage extends Message {
 

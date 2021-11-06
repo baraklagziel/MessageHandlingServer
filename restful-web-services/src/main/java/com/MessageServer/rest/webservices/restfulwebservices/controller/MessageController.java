@@ -1,7 +1,7 @@
 package com.MessageServer.rest.webservices.restfulwebservices.controller;
 
 import com.MessageServer.rest.webservices.restfulwebservices.model.Message;
-import com.MessageServer.rest.webservices.restfulwebservices.service.impl.IMessageService;
+import com.MessageServer.rest.webservices.restfulwebservices.service.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/message-handler")
 public class MessageController {
 
-    private com.MessageServer.rest.webservices.restfulwebservices.service.impl.IMessageService MessageService;
+    private IMessageService MessageService;
 
     @Autowired
     public MessageController(IMessageService IMessageService) {

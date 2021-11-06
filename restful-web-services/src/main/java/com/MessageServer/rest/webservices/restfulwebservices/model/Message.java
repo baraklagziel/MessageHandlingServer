@@ -1,6 +1,6 @@
 package com.MessageServer.rest.webservices.restfulwebservices.model;
 
-import com.MessageServer.rest.webservices.restfulwebservices.service.impl.Type;
+import com.MessageServer.rest.webservices.restfulwebservices.service.Type;
 
 import javax.persistence.*;
 
@@ -10,6 +10,20 @@ public abstract class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
+
+    public Message(String content, Type type) {
+        this.content = content;
+        this.type = type;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     private Type type;
     protected int value;
 
@@ -27,11 +41,9 @@ public abstract class Message {
     }
 
     public boolean isPositive() {
+        int value = getValue();
         return value > 0;
     }
 
-    public Message(String content, Type type) {
-        this.content = content;
-        this.type = type;
-    }
+
 }

@@ -1,9 +1,8 @@
-package com.MessageServer.rest.webservices.restfulwebservices.service;
+package com.MessageServer.rest.webservices.restfulwebservices.service.impl;
 
 import com.MessageServer.rest.webservices.restfulwebservices.exception.BadRequestException;
 import com.MessageServer.rest.webservices.restfulwebservices.model.Message;
-import com.MessageServer.rest.webservices.restfulwebservices.service.impl.IMessage;
-import com.MessageServer.rest.webservices.restfulwebservices.service.impl.Type;
+import com.MessageServer.rest.webservices.restfulwebservices.service.Type;
 import org.springframework.util.StringUtils;
 
 import java.util.Arrays;

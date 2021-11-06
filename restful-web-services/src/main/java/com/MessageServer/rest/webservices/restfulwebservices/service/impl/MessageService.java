@@ -1,11 +1,12 @@
-package com.MessageServer.rest.webservices.restfulwebservices.service;
+package com.MessageServer.rest.webservices.restfulwebservices.service.impl;
 
 import com.MessageServer.rest.webservices.restfulwebservices.exception.BadRequestException;
 import com.MessageServer.rest.webservices.restfulwebservices.model.Message;
 import com.MessageServer.rest.webservices.restfulwebservices.model.MessageWrapper;
-import com.MessageServer.rest.webservices.restfulwebservices.service.impl.IMessageService;
+import com.MessageServer.rest.webservices.restfulwebservices.service.IMessageService;
+import com.MessageServer.rest.webservices.restfulwebservices.validator.LengthValidatorHandler;
+import com.MessageServer.rest.webservices.restfulwebservices.validator.PositiveValidatorHandler;
 import com.MessageServer.rest.webservices.restfulwebservices.validator.Validator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -42,9 +43,9 @@ public class MessageService implements IMessageService {
     }
 
     private void validateMessage(Message httpRequest) {
-//        LengthValidatorHandler lengthValidationHandler = new LengthValidatorHandler(null);
-//        PositiveValidatorHandler positiveValidatorHandler = new PositiveValidatorHandler(lengthValidationHandler);
-//        Validator validator  = new Validator(positiveValidatorHandler);
-//        validator.validate(httpRequest);
+        LengthValidatorHandler lengthValidationHandler = new LengthValidatorHandler(null);
+        PositiveValidatorHandler positiveValidatorHandler = new PositiveValidatorHandler(lengthValidationHandler);
+        Validator validator  = new Validator(positiveValidatorHandler);
+        validator.validate(httpRequest);
     }
 }

@@ -1,4 +1,4 @@
-package com.MessageServer.rest.webservices.restfulwebservices.service.impl;
+package com.MessageServer.rest.webservices.restfulwebservices.service;
 
 import com.MessageServer.rest.webservices.restfulwebservices.model.Message;
 

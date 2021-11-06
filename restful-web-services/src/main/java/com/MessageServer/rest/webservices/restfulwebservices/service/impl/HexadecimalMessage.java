@@ -1,8 +1,7 @@
-package com.MessageServer.rest.webservices.restfulwebservices.service;
+package com.MessageServer.rest.webservices.restfulwebservices.service.impl;
 
 import com.MessageServer.rest.webservices.restfulwebservices.model.Message;
-import com.MessageServer.rest.webservices.restfulwebservices.service.impl.IMessage;
-import com.MessageServer.rest.webservices.restfulwebservices.service.impl.Type;
+import com.MessageServer.rest.webservices.restfulwebservices.service.Type;
 
 public class HexadecimalMessage extends Message {
 
@@ -15,6 +14,8 @@ public class HexadecimalMessage extends Message {
        return Integer.parseInt(getContent().trim(), 16 );
     }
 
-
-
+    public boolean isPositive() {
+        int value = getValue();
+        return value > 0;
+    }
 }

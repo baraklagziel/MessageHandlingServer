@@ -1,5 +1,7 @@
 package com.MessageServer.rest.webservices.restfulwebservices.validator;
 
+import com.MessageServer.rest.webservices.restfulwebservices.model.Message;
+
 public class Validator {
     private Handler handler;
 
@@ -7,7 +9,7 @@ public class Validator {
         this.handler = handler;
     }
 
-    public void validate(HttpRequest request) {
+    public void validate(Message request) {
         handler.handle(request);
     }
 }

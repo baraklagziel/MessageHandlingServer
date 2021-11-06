@@ -1,5 +1,7 @@
 package com.MessageServer.rest.webservices.restfulwebservices.validator;
 
+import com.MessageServer.rest.webservices.restfulwebservices.model.Message;
+
 public abstract class Handler {
     private Handler next;
 
@@ -7,11 +9,11 @@ public abstract class Handler {
         this.next = next;
     }
 
-    public void handle(HttpRequest request) {
+    public void handle(Message request) {
         if(doHandle(request)) return;
         if(next != null)
             next.handle(request);
 
     }
-    public abstract boolean doHandle(HttpRequest request);
+    public abstract boolean doHandle(Message request);
 }

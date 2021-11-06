@@ -14,4 +14,9 @@ public class MessageService implements IMessageService {
         //Save message
         return null;
     }
+
+    @Override
+    public void updateSum(String num) {
+
+    }
 }

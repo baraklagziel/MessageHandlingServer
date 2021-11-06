@@ -22,8 +22,7 @@ public class ConsumerController {
         context.executeStrategy(new Message(messageKey, messageValue));
 
         SumMessage sumMessage = new SumMessage(messageKey, consumerService.getSum());
-        int sum = 5;
-        return new SumMessage(messageKey, sum);
+        return sumMessage;
     }
 
     @GetMapping(value = "/")
