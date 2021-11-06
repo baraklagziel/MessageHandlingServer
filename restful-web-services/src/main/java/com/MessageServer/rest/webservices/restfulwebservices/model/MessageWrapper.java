@@ -2,7 +2,7 @@ package com.MessageServer.rest.webservices.restfulwebservices.model;
 
 public  class MessageWrapper {
     private String messageKey;
-    private String messageValue;
+    private int sum;
 
     public String getMessageKey() {
         return messageKey;
@@ -12,18 +12,26 @@ public  class MessageWrapper {
         this.messageKey = messageKey;
     }
 
-    public String getMessageValue() {
-        return messageValue;
+    public int getMessageValue() {
+        return sum;
     }
 
-    public void setMessageValue(String messageValue) {
-        this.messageValue = messageValue;
+    public void setMessageValue(int sum) {
+        this.sum = sum;
     }
 
-    public MessageWrapper(String messageKey, String messageValue) {
+    public MessageWrapper(String messageKey, int messageValue) {
         this.messageKey = messageKey;
-        this.messageValue = messageValue;
+        this.sum = messageValue;
     }
 
     public MessageWrapper(){}
+
+    @Override
+    public String toString() {
+        return "MessageWrapper{" +
+                "messageKey='" + messageKey + '\'' +
+                ", sum=" + sum +
+                '}';
+    }
 }

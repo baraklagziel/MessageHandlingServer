@@ -2,11 +2,11 @@ package com.example.consumerservice.model;
 
 public class Message {
     private String messageKey;
-    private String massageVale;
+    private int messageValue;
 
-    public Message(String messageKey, String massageVale) {
+    public Message(String messageKey, int messageValue) {
         this.messageKey = messageKey;
-        this.massageVale = massageVale;
+        this.messageValue = messageValue;
     }
 
     public String getMessageKey() {
@@ -17,11 +17,11 @@ public class Message {
         this.messageKey = messageKey;
     }
 
-    public String getMassageValue() {
-        return massageVale;
+    public int getMessageValue() {
+        return messageValue;
     }
 
-    public void setMassageValue(String massageVale) {
-        this.massageVale = massageVale;
+    public void setMassageValue(int messageValue) {
+        this.messageValue = messageValue;
     }
 }

@@ -19,7 +19,7 @@ public class MessageController {
 
     @GetMapping(value = "/{message}")
     @ResponseStatus(HttpStatus.OK)
-    public Message handleMessage(@PathVariable String message) {
+    public String handleMessage(@PathVariable String message) {
         return this.MessageService.sendMessage(message);
     }
 

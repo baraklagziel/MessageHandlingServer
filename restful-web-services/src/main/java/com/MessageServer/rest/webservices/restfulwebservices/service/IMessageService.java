@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IMessageService {
 //    Message getAllMessages();
-    Message sendMessage(String message);
+    String sendMessage(String message);
 }

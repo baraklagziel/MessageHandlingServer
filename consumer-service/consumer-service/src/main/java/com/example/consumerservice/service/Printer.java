@@ -6,6 +6,8 @@ import com.example.consumerservice.service.impl.OutputStrategy;
 public class Printer implements OutputStrategy {
     @Override
     public void outputDevice(Message message) {
-        System.out.println(String.format("Print with printer input: %1$s and total sum: %2s", message.getMessageKey(), message.getMassageValue()));
+        System.out.println("messgage: " + message.getMessageKey());
+        System.out.println("messgage: " + message.getMessageValue());
+        System.out.println("Print with printer input:" + message.getMessageKey()+ "and total sum:" +  message.getMessageValue());
     }
 }

@@ -7,6 +7,7 @@ import com.MessageServer.rest.webservices.restfulwebservices.service.IMessageSer
 import com.MessageServer.rest.webservices.restfulwebservices.validator.LengthValidatorHandler;
 import com.MessageServer.rest.webservices.restfulwebservices.validator.PositiveValidatorHandler;
 import com.MessageServer.rest.webservices.restfulwebservices.validator.Validator;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,25 +22,26 @@ public class MessageService implements IMessageService {
     private static String value;
 
     @Override
-    public Message sendMessage(String rawMessage) throws BadRequestException {
+    public String sendMessage(String rawMessage) throws BadRequestException {
         if (rawMessage == null || rawMessage.length() <= 0) {
             throw new BadRequestException("empty message");
         } else {
             Message messageObj = new MessageFactory().create(rawMessage);
             validateMessage(messageObj);
-            sendMessageImpl(messageObj);
+            String response = sendMessageImpl(messageObj);
             this.messages.add(messageObj);
-            return messageObj;
+            return response;
         }
     }
 
-    private void sendMessageImpl(Message message) {
+    private String sendMessageImpl(Message message) {
         HashMap<String, String> uriVariables = new HashMap<>();
         uriVariables.put("messageKey", message.getContent());
         uriVariables.put("messageValue", String.valueOf(message.getValue()));
-        MessageWrapper result = new RestTemplate().getForObject("http://localhost:8182/message-handler/producer/{messageKey}/to/{messageValue}", MessageWrapper.class, uriVariables);
-        System.out.println(result.getMessageKey());
-        System.out.println(result.getMessageValue());
+        ResponseEntity<String> entity = new RestTemplate().getForEntity("http://localhost:8182/message-handler/producer/{messageKey}/to/{messageValue}", String.class, uriVariables);
+        System.out.println(entity.getStatusCode());
+        System.out.println(entity.getBody());
+        return entity.getBody();
     }
 
     private void validateMessage(Message httpRequest) {

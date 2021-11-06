@@ -5,6 +5,16 @@ import com.example.consumerservice.service.impl.IMessageService;
 
 public class ConsumerService implements IMessageService {
     private volatile int sum;
+    private static ConsumerService instance = new ConsumerService();
+
+    //make the constructor private so that this class cannot be
+    //instantiated
+    private ConsumerService(){}
+
+    //Get the only object available
+    public static ConsumerService getInstance(){
+        return instance;
+    }
 
     @Override
     public Message createMessage(Message Message) {
