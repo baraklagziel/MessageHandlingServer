@@ -8,6 +8,6 @@ public class Printer implements OutputStrategy {
     public void outputDevice(Message message) {
         System.out.println("messgage: " + message.getMessageKey());
         System.out.println("messgage: " + message.getMessageValue());
-        System.out.println("Print with printer input:" + message.getMessageKey()+ "and total sum:" +  message.getMessageValue());
+        System.out.println("Print with printer input: " + message.getMessageKey()+ " total sum:" +  message.getMessageValue());
     }
 }

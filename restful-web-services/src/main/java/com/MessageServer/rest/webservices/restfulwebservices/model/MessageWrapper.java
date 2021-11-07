@@ -29,9 +29,6 @@ public  class MessageWrapper {
 
     @Override
     public String toString() {
-        return "MessageWrapper{" +
-                "messageKey='" + messageKey + '\'' +
-                ", sum=" + sum +
-                '}';
+        return "{\"messageKey\":\"messageKey\",\"sum\":\"sum\"}";
     }
 }

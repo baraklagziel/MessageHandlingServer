@@ -7,6 +7,7 @@ import com.MessageServer.rest.webservices.restfulwebservices.service.IMessageSer
 import com.MessageServer.rest.webservices.restfulwebservices.validator.LengthValidatorHandler;
 import com.MessageServer.rest.webservices.restfulwebservices.validator.PositiveValidatorHandler;
 import com.MessageServer.rest.webservices.restfulwebservices.validator.Validator;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,34 +15,43 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 @Service
 public class MessageService implements IMessageService {
-    private List<Message> messages = new ArrayList<>();;
+    private List<Message> messages = new ArrayList<>();
     private Validator validator;
-    private static String value;
+
+    private static String result;
+
+    public String getResult() {
+        return result;
+    }
+
+    public  void setResult(String result) {
+        MessageService.result = result;
+    }
 
     @Override
-    public String sendMessage(String rawMessage) throws BadRequestException {
+    public void sendMessage(String rawMessage) throws BadRequestException, JsonProcessingException {
         if (rawMessage == null || rawMessage.length() <= 0) {
             throw new BadRequestException("empty message");
         } else {
             Message messageObj = new MessageFactory().create(rawMessage);
             validateMessage(messageObj);
-            String response = sendMessageImpl(messageObj);
+            sendMessageImpl(messageObj);
             this.messages.add(messageObj);
-            return response;
         }
     }
 
-    private String sendMessageImpl(Message message) {
+    private void sendMessageImpl(Message message) throws JsonProcessingException {
         HashMap<String, String> uriVariables = new HashMap<>();
-        uriVariables.put("messageKey", message.getContent());
-        uriVariables.put("messageValue", String.valueOf(message.getValue()));
-        ResponseEntity<String> entity = new RestTemplate().getForEntity("http://localhost:8182/message-handler/producer/{messageKey}/to/{messageValue}", String.class, uriVariables);
-        System.out.println(entity.getStatusCode());
-        System.out.println(entity.getBody());
-        return entity.getBody();
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = ow.writeValueAsString(new MessageWrapper(message.getContent(), message.getValue()));
+        uriVariables.put("messageKey", json);
+        ResponseEntity<String> entity = new RestTemplate().getForEntity("http://localhost:8183/queue-handler/{messageKey}", String.class, uriVariables);
+        System.out.println(this.getResult());
     }
 
     private void validateMessage(Message httpRequest) {
